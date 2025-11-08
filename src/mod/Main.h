@@ -1,29 +1,28 @@
 #pragma once
 
-#include "ll/api/mod/NativeMod.h" //
+#include "ll/api/mod/NativeMod.h"
+#include "mod/Config.h"
 
 namespace my_mod {
 
 class MyMod {
 
 public:
-    static MyMod& getInstance(); //
+    static MyMod& getInstance();
 
-    MyMod() : mSelf(*ll::mod::NativeMod::current()) {} //
+    MyMod() : mSelf(*ll::mod::NativeMod::current()) {}
 
-    [[nodiscard]] ll::mod::NativeMod& getSelf() const { return mSelf; } //
+    [[nodiscard]] ll::mod::NativeMod& getSelf() const { return mSelf; }
 
-    /// @return True if the mod is loaded successfully.
-    bool load(); //
+    [[nodiscard]] Config const& getConfig() const { return mConfig; }
 
-    /// @return True if the mod is enabled successfully.
-    bool enable(); //
-
-    /// @return True if the mod is disabled successfully.
-    bool disable(); //
+    bool load();
+    bool enable();
+    bool disable();
 
 private:
-    ll::mod::NativeMod& mSelf; //
+    ll::mod::NativeMod& mSelf;
+    Config              mConfig;
 };
 
-} // namespace my_mod
+} // namespace
