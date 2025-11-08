@@ -36,19 +36,19 @@ MyMod& MyMod::getInstance() { //
 }
 
 bool MyMod::load() { //
-    getSelf().getLogger().info("加载 AllowOnlyZombieSpawning 中...");
+    getSelf().getLogger().info("加载 MobSpawnSetting 中...");
     getSelf().getLogger().info("Author: @2PuceWriter79890 - Github RE-Studio-CN");
     return true;
 }
 
 bool MyMod::enable() { //
-    getSelf().getLogger().info("启用 AllowOnlyZombieSpawning 中...");
+    getSelf().getLogger().info("启用 MobSpawnSetting 中...");
     getSelf().getLogger().info("Hook 成功");
     return true;
 }
 
 bool MyMod::disable() { //
-    getSelf().getLogger().info("禁用 AllowOnlyZombieSpawning 中...");
+    getSelf().getLogger().info("禁用 MobSpawnSetiing 中...");
     getSelf().getLogger().info("Hook 已卸载");
     return true;
 }
