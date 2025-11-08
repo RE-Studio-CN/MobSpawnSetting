@@ -1,4 +1,4 @@
-#include "mod/MyMod.h"
+#include "mod/Main.h"
 
 #include "ll/api/mod/RegisterHelper.h"
 #include "ll/api/io/Logger.h"
