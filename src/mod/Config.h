@@ -1,16 +1,18 @@
 #pragma once
 
-#include "ll/api/Config.h" 
-
+#include "ll/api/Config.h"
 #include <string>
 #include <vector>
+#include <cstdint>
 
 namespace my_mod {
 
 struct Config {
-    int64 version = 1;
+    int64 version = 2;
 
-    std::vector<std::string> allowedFamilies = {"zombie"};
+    bool whitelistMode = true; 
+
+    std::vector<std::string> targetFamilies = {"zombie"};
 }; 
 
-} // namespace
+} // namespace my_mod
