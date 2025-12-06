@@ -7,13 +7,17 @@
 namespace my_mod {
 
 struct Config {
-    int64 version = 6;
+    int64 version = 8;
 
     bool whitelistMode = true; 
+
+    bool enableFamilyFilter = true; 
     std::vector<std::string> targetFamilies = {"zombie"};
 
-    float densityMultiplier = 2.0f;
+    bool enableIdentifierFilter = true; 
+    std::vector<std::string> targetMonsterIds = {}; 
 
+    float densityMultiplier = 2.0f;
     float globalCapMultiplier = 1.0f;
 }; 
 

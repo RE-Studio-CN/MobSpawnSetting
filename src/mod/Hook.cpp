@@ -4,8 +4,10 @@
 #include "mc/world/level/Level.h"   
 #include "mc/world/level/Spawner.h" 
 #include "mc/deps/core/string/HashedString.h"
+#include "mc/world/actor/ActorDefinitionIdentifier.h" 
 #include "mod/Main.h"
 #include <array>
+#include <string>
 
 namespace {
 
@@ -46,39 +48,51 @@ LL_AUTO_TYPE_INSTANCE_HOOK(
 ) {
     const auto& config = my_mod::MyMod::getInstance().getConfig();
 
-    bool inList = false;
-    for (const auto& familyName : config.targetFamilies) {
-        if (this->hasFamily(HashedString(familyName.c_str()))) {
-            inList = true;
-            break; 
+    bool isFamilyMatch = false;
+    bool isIdMatch = false;
+
+    if (config.enableFamilyFilter) {
+        for (const auto& familyName : config.targetFamilies) {
+            if (this->hasFamily(HashedString(familyName.c_str()))) {
+                isFamilyMatch = true;
+                break; 
+            }
         }
     }
 
+    if (config.enableIdentifierFilter) {
+        std::string myId = this->getActorIdentifier().getFullName(); 
+        for (const auto& targetId : config.targetMonsterIds) {
+            if (myId == targetId) {
+                isIdMatch = true;
+                break;
+            }
+        }
+    }
+
+    bool isTarget = isFamilyMatch || isIdMatch;
+
     if (config.whitelistMode) {
-        if (!inList) return false;
+        if (!isTarget) return false;
     } else {
-        if (inList) return false;
+        if (isTarget) return false;
     }
 
     return origin(checkSpawnPosition);
 }
 
 static bool isSpawnerHooked = false;
-
 using SpawnerCountFunc = unsigned int (*)(void*);
-
 static SpawnerCountFunc originalSpawnerCount = nullptr;
 
 unsigned int DetourGetMobCount(void* self) {
     if (!originalSpawnerCount) return 0;
-    
     unsigned int realCount = originalSpawnerCount(self);
 
     const auto& config = my_mod::MyMod::getInstance().getConfig();
     if (config.globalCapMultiplier > 1.0f) {
         return static_cast<unsigned int>(realCount / config.globalCapMultiplier);
     }
-
     return realCount;
 }
 
@@ -90,11 +104,10 @@ LL_AUTO_TYPE_INSTANCE_HOOK(
     void
 ) {
     origin();
+
     if (!isSpawnerHooked) {
         auto& spawner = this->getSpawner();
-
         void** vtable = *reinterpret_cast<void***>(&spawner);
-
         void* targetFunctionAddress = vtable[15];
 
         ll::memory::hook(
@@ -105,8 +118,8 @@ LL_AUTO_TYPE_INSTANCE_HOOK(
         );
 
         isSpawnerHooked = true;
-        
         my_mod::MyMod::getInstance().getSelf().getLogger().info("Global MobCap Hook installed successfully!");
     }
 }
+
 } // namespace
