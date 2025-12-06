@@ -17,7 +17,7 @@
             "label": "",
             "platform": "win-x64",
             "dependencies": {
-                "github.com/LiteLDev/LeviLamina": "Required LeviLamina version range"
+                "github.com/LiteLDev/LeviLamina": "1.7.x"
             },
             "assets": [
                 {
