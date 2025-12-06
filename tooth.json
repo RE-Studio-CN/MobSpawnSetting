@@ -1,16 +1,16 @@
 {
     "format_version": 3,
     "format_uuid": "289f771f-2c9a-4d73-9f3f-8492495a924d",
-    "tooth": "example.com/my-user/my-mod",
-    "version": "0.0.0",
+    "tooth": "github.com/RE-Studio-CN/MobSpawnSetting",
+    "version": "2.0.1",
     "info": {
-        "name": "My Mod",
-        "description": "Description of my mod",
+        "name": "MobSpawnSetting",
+        "description": "控制生物生成",
         "tags": [
             "platform:levilamina",
             "type:mod"
         ],
-        "avatar_url": "https://example.com/my-mod/avatar.png"
+        "avatar_url": ""
     },
     "variants": [
         {
@@ -23,13 +23,13 @@
                 {
                     "type": "zip",
                     "urls": [
-                        "https://example.com/my-mod/assets.zip"
+                        "https://github.com/RE-Studio-CN/MobSpawnSetting/releases/download/v2.0.1/MobSpawnSetting-windows-x64.zip"
                     ],
                     "placements": [
                         {
                             "type": "dir",
-                            "src": "my-mod/",
-                            "dest": "plugins/my-mod/"
+                            "src": "MobSpawnSetting/",
+                            "dest": "plugins/MobSpawnSetting/"
                         }
                     ]
                 }
