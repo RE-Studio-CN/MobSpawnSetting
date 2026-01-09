@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace my_mod {
+namespace SpawnerSetting {
 
 struct Config {
     int64 version = 8;
@@ -21,4 +21,4 @@ struct Config {
     float globalCapMultiplier = 1.0f;
 }; 
 
-} // namespace my_mod
+} // namespace SpawnerSetting

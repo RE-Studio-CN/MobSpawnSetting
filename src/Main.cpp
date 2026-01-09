@@ -1,17 +1,17 @@
-#include "mod/Main.h"
+#include "Main.h"
 
 #include "ll/api/Config.h"
 #include "ll/api/mod/RegisterHelper.h"
 #include "ll/api/io/Logger.h"
 
-namespace my_mod {
+namespace SpawnerSetting {
 
-MyMod& MyMod::getInstance() {
-    static MyMod instance;
+Spawner& Spawner::getInstance() {
+    static Spawner instance;
     return instance;
 }
 
-bool MyMod::load() {
+bool Spawner::load() {
     getSelf().getLogger().info("加载 AllowOnlyFamily 中...");
     getSelf().getLogger().info("Author: Xiao_Puce_awa - Github @2PuceWriter79890");
 
@@ -27,12 +27,12 @@ bool MyMod::load() {
     return true;
 }
 
-bool MyMod::enable() {
+bool Spawner::enable() {
     getSelf().getLogger().info("启用 AllowOnlyFamily 中...");
     return true;
 }
 
-bool MyMod::disable() {
+bool Spawner::disable() {
     getSelf().getLogger().info("启用 AllowOnlyFamily 中...");
     getSelf().getLogger().info("Hook 已被卸载");
     return true;
@@ -40,4 +40,4 @@ bool MyMod::disable() {
 
 } // namespace
 
-LL_REGISTER_MOD(my_mod::MyMod, my_mod::MyMod::getInstance());
+LL_REGISTER_MOD(SpawnerSetting::Spawner, SpawnerSetting::Spawner::getInstance());

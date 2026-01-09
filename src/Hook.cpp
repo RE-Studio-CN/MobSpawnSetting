@@ -1,11 +1,14 @@
+#include "Main.h"
+
 #include "ll/api/memory/Hook.h"
+
 #include "mc/world/actor/Mob.h"
 #include "mc/world/level/dimension/Dimension.h"
-#include "mc/world/level/Level.h"   
-#include "mc/world/level/Spawner.h" 
+#include "mc/world/level/Level.h"
+#include "mc/world/level/Spawner.h"
 #include "mc/deps/core/string/HashedString.h"
-#include "mc/world/actor/ActorDefinitionIdentifier.h" 
-#include "mod/Main.h"
+#include "mc/world/actor/ActorDefinitionIdentifier.h"
+
 #include <array>
 #include <string>
 
@@ -14,7 +17,7 @@ namespace {
 using MobDensityArray = std::array<float, 7>;
 
 void applyDensityMultiplier(Dimension* dim) {
-    auto& config = my_mod::MyMod::getInstance().getConfig();
+    auto& config = SpawnerSetting::Spawner::getInstance().getConfig();
     float multiplier = config.densityMultiplier;
 
     if (multiplier == 1.0f) return;
@@ -46,7 +49,7 @@ LL_AUTO_TYPE_INSTANCE_HOOK(
     bool,
     bool checkSpawnPosition
 ) {
-    const auto& config = my_mod::MyMod::getInstance().getConfig();
+    const auto& config = SpawnerSetting::Spawner::getInstance().getConfig();
 
     bool isFamilyMatch = false;
     bool isIdMatch = false;
@@ -89,7 +92,7 @@ unsigned int DetourGetMobCount(void* self) {
     if (!originalSpawnerCount) return 0;
     unsigned int realCount = originalSpawnerCount(self);
 
-    const auto& config = my_mod::MyMod::getInstance().getConfig();
+    const auto& config = SpawnerSetting::Spawner::getInstance().getConfig();
     if (config.globalCapMultiplier > 1.0f) {
         return static_cast<unsigned int>(realCount / config.globalCapMultiplier);
     }
@@ -118,7 +121,7 @@ LL_AUTO_TYPE_INSTANCE_HOOK(
         );
 
         isSpawnerHooked = true;
-        my_mod::MyMod::getInstance().getSelf().getLogger().info("Global MobCap Hook installed successfully!");
+        SpawnerSetting::Spawner::getInstance().getSelf().getLogger().info("Global MobCap Hook installed successfully!");
     }
 }
 

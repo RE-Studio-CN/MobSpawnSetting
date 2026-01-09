@@ -1,16 +1,16 @@
 #pragma once
 
 #include "ll/api/mod/NativeMod.h"
-#include "mod/Config.h"
+#include "Config.h"
 
-namespace my_mod {
+namespace SpawnerSetting {
 
-class MyMod {
+class Spawner {
 
 public:
-    static MyMod& getInstance();
+    static Spawner& getInstance();
 
-    MyMod() : mSelf(*ll::mod::NativeMod::current()) {}
+    Spawner() : mSelf(*ll::mod::NativeMod::current()) {}
 
     [[nodiscard]] ll::mod::NativeMod& getSelf() const { return mSelf; }
 
