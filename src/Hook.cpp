@@ -1,6 +1,8 @@
 #include "Main.h"
 
 #include "ll/api/memory/Hook.h"
+#include "ll/api/memory/Signature.h"
+#include "ll/api/memory/Memory.h"
 
 #include "mc/world/actor/Mob.h"
 #include "mc/world/level/dimension/Dimension.h"
@@ -11,6 +13,8 @@
 
 #include <array>
 #include <string>
+
+using namespace ll::literals::memory_literals;
 
 namespace {
 
@@ -84,45 +88,36 @@ LL_AUTO_TYPE_INSTANCE_HOOK(
     return origin(checkSpawnPosition);
 }
 
-static bool isSpawnerHooked = false;
-using SpawnerCountFunc = unsigned int (*)(void*);
-static SpawnerCountFunc originalSpawnerCount = nullptr;
-
-unsigned int DetourGetMobCount(void* self) {
-    if (!originalSpawnerCount) return 0;
-    unsigned int realCount = originalSpawnerCount(self);
-
-    const auto& config = SpawnerSetting::Spawner::getInstance().getConfig();
-    if (config.globalCapMultiplier > 1.0f) {
-        return static_cast<unsigned int>(realCount / config.globalCapMultiplier);
-    }
-    return realCount;
-}
-
-LL_AUTO_TYPE_INSTANCE_HOOK(
-    LevelTickHook,
+LL_AUTO_STATIC_HOOK(
+    SpawnerTickHook,
     ll::memory::HookPriority::Normal,
-    Level,
-    &Level::$tick, 
-    void
+    "48 8B C4 4C 89 48 ? 55 53"_sig,
+    uint64_t,
+    ::Spawner* spawner,
+    int64_t* a2,
+    int64_t a3,
+    void* a4
 ) {
-    origin();
+    auto& config = SpawnerSetting::Spawner::getInstance().getConfig();
+    float multiplier = config.globalCapMultiplier;
 
-    if (!isSpawnerHooked) {
-        auto& spawner = this->getSpawner();
-        void** vtable = *reinterpret_cast<void***>(&spawner);
-        void* targetFunctionAddress = vtable[15];
-
-        ll::memory::hook(
-            targetFunctionAddress,
-            reinterpret_cast<void*>(&DetourGetMobCount),
-            reinterpret_cast<void**>(&originalSpawnerCount),
-            ll::memory::HookPriority::Normal
-        );
-
-        isSpawnerHooked = true;
-        SpawnerSetting::Spawner::getInstance().getSelf().getLogger().info("Global MobCap Hook installed successfully!");
+    if (multiplier <= 0.0f || multiplier == 1.0f) {
+        return origin(spawner, a2, a3, a4);
     }
+
+    auto& mobCount = ll::memory::dAccess<unsigned int>(spawner, 552);
+    unsigned int realCount = mobCount;
+
+    unsigned int fakeCount = static_cast<unsigned int>(realCount / multiplier);
+    mobCount = fakeCount;
+
+    auto result = origin(spawner, a2, a3, a4);
+
+    unsigned int newFakeCount = mobCount;
+    int diff = (int)newFakeCount - (int)fakeCount;
+    mobCount = realCount + diff;
+
+    return result;
 }
 
 } // namespace

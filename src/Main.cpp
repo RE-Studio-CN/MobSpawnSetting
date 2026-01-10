@@ -12,8 +12,8 @@ Spawner& Spawner::getInstance() {
 }
 
 bool Spawner::load() {
-    getSelf().getLogger().info("加载 AllowOnlyFamily 中...");
-    getSelf().getLogger().info("Author: Xiao_Puce_awa - Github @2PuceWriter79890");
+    getSelf().getLogger().info("加载 MobSpawnSetting 中...");
+    getSelf().getLogger().info("Author: PuceLi");
 
     std::filesystem::path configPath = getSelf().getModDir() / "config.json";
     if (!ll::config::loadConfig(mConfig, configPath)) {
@@ -28,12 +28,12 @@ bool Spawner::load() {
 }
 
 bool Spawner::enable() {
-    getSelf().getLogger().info("启用 AllowOnlyFamily 中...");
+    getSelf().getLogger().info("启用 MobSpawnSetting 中...");
     return true;
 }
 
 bool Spawner::disable() {
-    getSelf().getLogger().info("启用 AllowOnlyFamily 中...");
+    getSelf().getLogger().info("启用 MobSpawnSetting 中...");
     getSelf().getLogger().info("Hook 已被卸载");
     return true;
 }

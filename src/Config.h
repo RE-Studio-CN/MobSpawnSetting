@@ -19,6 +19,9 @@ struct Config {
 
     float densityMultiplier = 2.0f;
     float globalCapMultiplier = 1.0f;
+
+    // 设置为 2 表示 2 倍速 即每刻尝试生成 2 次 
+    // int spawnSpeed = 10; 
 }; 
 
 } // namespace SpawnerSetting

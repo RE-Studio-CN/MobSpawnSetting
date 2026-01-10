@@ -29,7 +29,7 @@ target("MobSpawnSetting") -- Change this to your mod name.
     add_cxflags( "/EHa", "/utf-8", "/W4", "/w44265", "/w44289", "/w44296", "/w45263", "/w44738", "/w45204")
     add_defines("NOMINMAX", "UNICODE")
     add_packages("levilamina")
-    set_exceptions("none") -- To avoid conflicts with /EHa.
+    set_exceptions("cxx") -- To avoid conflicts with /EHa.
     set_kind("shared")
     set_languages("c++20")
     set_symbols("debug")
