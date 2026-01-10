@@ -7,7 +7,7 @@
 namespace SpawnerSetting {
 
 struct Config {
-    int64 version = 8;
+    int64 version = 9;
 
     bool whitelistMode = true; 
 
@@ -21,7 +21,7 @@ struct Config {
     float globalCapMultiplier = 1.0f;
 
     // 设置为 2 表示 2 倍速 即每刻尝试生成 2 次 
-    // int spawnSpeed = 10; 
+    int spawnSpeed = 10; 
 }; 
 
 } // namespace SpawnerSetting

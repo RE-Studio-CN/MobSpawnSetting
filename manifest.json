@@ -2,6 +2,6 @@
     "name": "${modName}",
     "entry": "${modFile}",
     "version": "${modVersion}",
-    "author": "Github@2PuceWrier79890",
+    "author": "PuceLi",
     "type": "native"
 }
