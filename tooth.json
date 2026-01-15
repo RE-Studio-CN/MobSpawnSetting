@@ -23,7 +23,7 @@
                 {
                     "type": "zip",
                     "urls": [
-                        "https://github.com/RE-Studio-CN/MobSpawnSetting/releases/download/v3.0.0/MobSpawnSetting-windows-x64.zip"
+                        "https://{{tooth}}/releases/download/v{{version}}/MobSpawnSetting-windows-x64.zip"
                     ],
                     "placements": [
                         {

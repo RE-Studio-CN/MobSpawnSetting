@@ -99,6 +99,7 @@ LL_AUTO_STATIC_HOOK(
     SpawnerTickHook,
     ll::memory::HookPriority::Normal,
     "48 8B C4 4C 89 48 20 55 53 56 57 41 54 41 55 41 56 41 57 48 8D"_sig,
+    // 1.21.130.4: 48 8B C4 4C 89 48 ? 55
     uint64_t,
     ::Spawner* spawner,
     int64_t* a2,
