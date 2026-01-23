@@ -5,12 +5,12 @@
 
 namespace SpawnerSetting {
 
-class Spawner {
+class SpawnerMod {
 
 public:
-    static Spawner& getInstance();
+    static SpawnerMod& getInstance();
 
-    Spawner() : mSelf(*ll::mod::NativeMod::current()) {}
+    SpawnerMod() : mSelf(*ll::mod::NativeMod::current()) {}
 
     [[nodiscard]] ll::mod::NativeMod& getSelf() const { return mSelf; }
 
@@ -25,4 +25,4 @@ private:
     Config              mConfig;
 };
 
-} // namespace
+} // namespace SpawnerSetting
