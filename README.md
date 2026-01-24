@@ -1,4 +1,6 @@
-**MobSpawnSettings** 是专为生存模式开发的插件。其提供了生物生成控制功能，允许服主自定义生物生成的黑白名单、突破原版区块密度限制等。
+**MobSpawnSettings** 是专为生存模式开发的插件。其提供了生物生成控制功能，允许管理员自定义生物生成的黑白名单、突破原版区块密度限制等。
+
+---
 
 ## 主要功能
 
@@ -119,7 +121,18 @@ _注：黑名单模式下列表为空 = 允许所有生物_
 
 ---
 
-## 安装
+## 安装（服务端）
 
-下载该插件。放入 `plugins` 内，启动服务器，自动生成配置文件。
-修改 `plugins/MobSpawnSettings/config.json` 后重启服务器将应用配置。
+### 使用 LIP
+
+`lip install github.com/RE-Studio-CN/MobSpawnSetting`
+
+### 手动安装
+
+从 **Releases** 下载该插件，解压到 `plugins` 内。
+
+---
+
+## MineBBS
+
+[MobSpawnSettings](https://www.minebbs.com/resources/mobspawnsettings.14280/)
