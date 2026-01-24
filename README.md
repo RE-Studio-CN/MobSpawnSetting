@@ -35,7 +35,7 @@
 ### 默认配置
 ``` json5
 {
-    "version": 9,
+    "version": 8,
     "whitelistMode": false,             // 工作模式: true=白名单 false=黑名单
     "enableFamilyFilter": true,         // 是否启用族过滤
     "targetFamilies": [
