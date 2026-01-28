@@ -1,3 +1,7 @@
+# 此仓库已移到[此处](https://github.com/PuceLi/MobSpawnSetting)
+
+---
+
 **MobSpawnSettings** 是专为生存模式开发的插件。其提供了生物生成控制功能，允许管理员自定义生物生成的黑白名单、突破原版区块密度限制等。
 
 ---
